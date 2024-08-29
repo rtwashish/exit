@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exit Price Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .input-section {
+            margin-bottom: 15px;
+        }
+        .input-section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-section input {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .result-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .result-section button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .result-section button:hover {
+            background-color: #45a049;
+        }
+        .result-section p {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Exit Price Calculator</h1>
+        <div class="input-section">
+            <label for="avgPrice">Average Purchase Price (INR):</label>
+            <input type="number" id="avgPrice" step="0.01" required>
+        </div>
+        <div class="input-section">
+            <label for="lotSize">Lot Size:</label>
+            <input type="number" id="lotSize" required>
+        </div>
+        <div class="input-section">
+            <label for="numLots">Number of Lots:</label>
+            <input type="number" id="numLots" required>
+        </div>
+        <div class="input-section">
+            <label for="targetProfit">Targeted Profit (INR):</label>
+            <input type="number" id="targetProfit" step="0.01" required>
+        </div>
+        <div class="result-section">
+            <button onclick="calculateExitPrice()">Calculate Exit Price</button>
+            <p id="exitPriceResult">Exit Price will be displayed here.</p>
+        </div>
+    </div>
+    <script>
+        function calculateExitPrice() {
+            // Get input values
+            const avgPrice = parseFloat(document.getElementById('avgPrice').value);
+            const lotSize = parseInt(document.getElementById('lotSize').value);
+            const numLots = parseInt(document.getElementById('numLots').value);
+            const targetProfit = parseFloat(document.getElementById('targetProfit').value);
+
+            // Calculate exit price
+            const totalValue = avgPrice * lotSize * numLots + targetProfit;
+            const exitPrice = totalValue / (lotSize * numLots);
+
+            // Display result
+            document.getElementById('exitPriceResult').textContent = `Exit Price: ${exitPrice.toFixed(2)} INR`;
+        }
+    </script>
+</body>
+</html>
